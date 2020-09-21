@@ -12,7 +12,7 @@ def file_reader(path):
             else:
                 fields = line.strip().split()
                 fields.append("")
-            return fields
+            yield fields
 
 
 def main():
