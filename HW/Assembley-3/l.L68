@@ -1,0 +1,61 @@
+00001000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 4/30/2019 7:24:58 PM
+
+00000000                             1  *----------------------------------------------------------
+00000000                             2  * Title      :
+00000000                             3  * Written by :
+00000000                             4  * Date       :
+00000000                             5  * Description:
+00000000                             6  *-----------------------------------------------------------
+00001000                             7      ORG    $1000
+00001000                             8  START:                  ; first instruction of program
+00001000                             9  
+00001000                            10  *Put program code here
+00001000                            11  
+00001000  43F9 00002000             12     lea     filename , a1
+00001006  303C 0033                 13      move    #51, d0
+0000100A  4E4F                      14      trap    #15
+0000100C                            15      
+0000100C  243C 0000205C             16      move.l  #filesize, d2
+00001012  43F9 0000200C             17      lea     buffer, a1
+00001018  303C 0035                 18      move    #53, d0
+0000101C  4E4F                      19      trap    #15
+0000101E                            20      
+0000101E  363C 0005                 21      move    #5, d3  ; counter
+00001022                            22      
+00001022                            23  convert_loop:
+00001022  4A03                      24      tst.b   d3
+00001024  6700 000A                 25      beq     done
+00001028  0419 0030                 26      sub.b   #$30, (a1)+
+0000102C  5303                      27      sub.b   #1, d3
+0000102E  60F2                      28      bra    convert_loop
+00001030                            29      
+00001030                            30  done:
+00001030                            31  
+00001030  FFFF FFFF                 32      SIMHALT             ; halt simulator
+00001034                            33      
+00002000                            34      org $2000
+00002000                            35  
+00002000                            36  * Put variables and constants here
+00002000                            37  
+00002000= 73 75 70 72 69 74 ...     38  filename    dc.b    'supriti.txt', 0
+0000200C                            39  buffer      ds.b    80
+0000205C= 50                        40  filesize    dc.b    80
+0000205D                            41  
+0000205D                            42  
+0000205D                            43      END    START        ; last line of source
+
+No errors detected
+No warnings generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
+BUFFER              200C
+CONVERT_LOOP        1022
+DONE                1030
+FILENAME            2000
+FILESIZE            205C
+START               1000
